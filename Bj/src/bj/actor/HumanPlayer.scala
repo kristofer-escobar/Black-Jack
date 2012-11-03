@@ -7,6 +7,7 @@ import bj.card.Card
 import bj.util.Logs
 import bj.hkeeping.Broke
 import bj.ui.HumanGUI
+import bj.ui.HumanGUI$
 
 object HumanPlayer {
   
@@ -24,7 +25,14 @@ object HumanPlayer {
   }
 }
 
-class HumanPlayer(name: String, var bankRoll: Double, betAmt: Double) extends Player(name,  bankRoll, betAmt) {
+class HumanPlayer(name: String , var bankRoll: Double, betAmt: Double) extends Player(name,  bankRoll, betAmt) {
+  var playerName = name
+  
+  var playerBankRoll = bankRoll
+  
+  var playerBetAmount = betAmt
+   
+  
 override
   def act {
     loop {
@@ -39,13 +47,17 @@ override
           
           debug(this + " received dealer's up card = " + card)
           
-          //displayUpCard()
+          // Update game.
+         // update
           
           play(card)
 
         // Receives a card from the dealer
         case card: Card =>         
           hitMe(card)
+       
+          //Update game.
+         // update
 
         // Receives broke message
         case Broke =>
@@ -55,6 +67,7 @@ override
         case Observe(card,player,shoeSize) =>
           debug(this+" observed: "+card)
           observe(card,player,shoeSize)
+          //send msg to humanGUi to update display
           
         // Receives the table number I've been assigned to
         case TableNumber(tid : Int) =>
@@ -86,9 +99,15 @@ override
         case dontKnow =>
           // Got something we REALLY didn't expect
           debug(this+" received unexpected: "+dontKnow)
-      }
-    }
+      } // End of React.
+    } // End of Loop.
 
-  }
-}
+  }// End of act.
+
+// Update the game screen.
+def update() = {}
+
+def hit(){Hit}
+
+} //  End of Class.
 

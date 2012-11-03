@@ -351,7 +351,9 @@ class Dealer extends Actor with Hand with Logs {
     // seen this card
     for(i <- (0 until players.size)) {
       for(j <- (1 until cards.size)) {
-    	  players(i) ! Observe(cards(j),i,shoe.size)   
+    	  // Changed on 10/31/12
+    	  //players(i) ! Observe(cards(j),i,shoe.size)   
+    	  players(i) ! Observe(cards(j),-1,shoe.size) 
       }
     }
   }

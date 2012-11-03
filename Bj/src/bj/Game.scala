@@ -49,6 +49,6 @@ object Game extends Logs {
     Thread.sleep(1000)
     
     debug("telling house go")
-    //House ! Go
+    House ! Go
   }
 }
